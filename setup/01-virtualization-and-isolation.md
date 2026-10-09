@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | In progress: final connectivity and isolation tests pending |
+| **Status** | Complete |
 | **Date** | 2026-10-08 to 2026-10-09 |
 | **Hosts in scope** | Windows 11 host, KALI, LNX-TGT |
 
@@ -88,13 +88,18 @@ iface eth0 inet static
 
 | # | Test | Expected | Result | Evidence |
 |---|---|---|---|---|
-| 1 | KALI adapter configuration | Internal `soc-lab`, promiscuous allow-vms, NAT disconnected | **Pass** | `phase1-kali-network-settings.png` |
-| 2 | LNX-TGT adapter configuration | Internal `soc-lab` only; NIC 2–4 disabled | **Pass** | `phase1-lnx-tgt-network-settings.png` |
-| 3 | KALI address | `eth0` UP, 10.10.10.50/24 | **Pass** | `phase1-kali-ip-addr.png` |
-| 4 | KALI route table | Only `10.10.10.0/24`; no `default` route | _Pending_ | `phase1-kali-ip-route.png` |
-| 5 | LNX-TGT address | 10.10.10.30/24 | _Pending_ | `phase1-lnx-tgt-ifconfig.png` |
-| 6 | KALI → LNX-TGT connectivity | `ping 10.10.10.30`: 0% loss | _Pending_ | `phase1-ping-lab-success.png` |
-| 7 | KALI → internet isolation | `ping 8.8.8.8`: Network is unreachable | _Pending_ | `phase1-ping-internet-blocked.png` |
+| 1 | KALI adapter configuration | Internal `soc-lab`, NAT cable disconnected | **Pass** | [Kali adapters](../evidence/screenshots/phase1-kali-adapter-verification.png) |
+| 2 | KALI promiscuous mode | `Promisc Policy: allow-vms` on NIC 1 | **Pass** | `showvminfo` output (see Issues: not shown by `--machinereadable`) |
+| 3 | LNX-TGT adapter configuration | Internal `soc-lab` only; NIC 2–4 disabled | **Pass** | [LNX-TGT reconfiguration](../evidence/screenshots/phase1-lnx-tgt-reconfigure.png), [LNX-TGT adapters](../evidence/screenshots/phase1-lnx-tgt-adapter-verification.png) |
+| 4 | KALI address | `eth0` UP, 10.10.10.50/24; `eth1` (NAT) DOWN | **Pass** | [Kali connectivity and isolation](../evidence/screenshots/phase1-kali-connectivity-and-isolation.png) |
+| 5 | KALI route table | Only `10.10.10.0/24`; no `default` route | **Pass** | same screenshot |
+| 6 | LNX-TGT address | 10.10.10.30, mask 255.255.255.0 | **Pass** | [LNX-TGT ifconfig](../evidence/screenshots/phase1-lnx-tgt-ifconfig.png) |
+| 7 | KALI → LNX-TGT connectivity | `ping -c 4 10.10.10.30`: 0% loss | **Pass**: 4/4 received, avg RTT 2.7 ms, TTL 64 | [Kali connectivity and isolation](../evidence/screenshots/phase1-kali-connectivity-and-isolation.png) |
+| 8 | KALI → internet isolation | `ping -c 2 8.8.8.8` fails | **Pass**: `connect: Network is unreachable` | same screenshot |
+
+**Interpretation of test 8:** the ping failed immediately with `Network is unreachable`, not after a timeout. The kernel refused to send the packet because no route matched 8.8.8.8, which confirms the absence of a default route. A timeout would instead have meant the packet left Kali and was dropped somewhere, a weaker form of isolation.
+
+**Interpretation of test 7:** TTL 64 is the default starting value for Linux hosts, unchanged, which confirms that KALI and LNX-TGT sit on the same layer-2 segment with no router in between.
 
 ## 4. Findings
 
