@@ -1,0 +1,23 @@
+# VM disks, images and saved states: large, and may contain lab credentials
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.ova
+*.ovf
+*.iso
+*.sav
+*.nvram
+
+# Secrets and keys
+*.key
+*.pem
+.env
+*secret*
+*password*
+
+# Editor / OS clutter
+.vscode/
+Thumbs.db
+desktop.ini
+.DS_Store
