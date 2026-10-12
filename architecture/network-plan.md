@@ -41,8 +41,8 @@
 |---|---|---|---|---|---|
 | WAZUH-SRV | SIEM: manager, indexer, dashboard | Ubuntu Server LTS | 10.10.10.10/24 | 4 GB / 2 | Planned (Phase 4) |
 | WIN-TGT | Monitored Windows endpoint | Windows 11 Enterprise evaluation | 10.10.10.20/24 | 4 GB / 2 | Planned (Phase 3) |
-| LNX-TGT | Vulnerable Linux target | Metasploitable 2 | 10.10.10.30/24 | 512 MB / 1 | Network configured (Phase 1) |
-| KALI | Assessment and packet capture | Kali Linux 2026.1 | 10.10.10.50/24 | 2 GB / 2 | Configured (Phase 1) |
+| LNX-TGT | Vulnerable Linux target | Metasploitable 2 | 10.10.10.30/24 | 512 MB / 1 | Clean baseline snapshot (Phase 2) |
+| KALI | Assessment and packet capture | Kali Linux 2026.1 | 10.10.10.50/24 | 2 GB / 2 | Baseline verified (Phase 2) |
 
 All addresses are static. The `soc-lab` network has no DHCP server, and no host is configured with a default gateway.
 
@@ -79,7 +79,7 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 | 2 | Internal Network with no gateway | Routing out of the lab |
 | 3 | NAT cables disconnected on KALI and targets during exercises | Scans or simulations reaching the internet |
 | 4 | LNX-TGT has no NAT adapter at all | An intentionally vulnerable host gaining an internet path |
-| 5 | Pre-flight `ip route` check on KALI before each exercise | Human error, such as a NAT cable left connected |
+| 5 | Pre-flight isolation check on KALI before each exercise ([scripts/preflight.sh](../scripts/preflight.sh)) | Human error, such as a NAT cable left connected |
 | 6 | Explicit lab IPs only in tool commands | Mistyped targets or hostnames |
 | 7 | Clipboard host-to-guest only; drag-and-drop and shared folders disabled | Files or data crossing to the host |
 | 8 | Dashboard port-forward bound to 127.0.0.1 | Other devices on the home Wi-Fi reaching the SIEM |

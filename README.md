@@ -2,7 +2,7 @@
 
 An isolated, self-hosted SOC lab for practising network reconnaissance, endpoint monitoring, threat detection and incident response. Controlled attack simulations are run against lab-owned systems, then investigated from the defender's side using SIEM alerts, endpoint telemetry and packet captures, and mapped to MITRE ATT&CK.
 
-> **Status:** Phase 1 (virtualization and network isolation) complete. Phase 2 (Kali Linux) next.
+> **Status:** Phases 1 (virtualization and network isolation) and 2 (Kali Linux baseline) complete. Phase 3 (Windows target) next.
 
 ## Objectives
 
@@ -32,7 +32,7 @@ VirtualBox · Kali Linux · Wazuh · Sysmon · Wireshark · Nmap · Metasploitab
 | Phase | Topic | Status | Write-up |
 |---|---|---|---|
 | 1 | Virtualization and network isolation | Complete | [setup/01-virtualization-and-isolation.md](setup/01-virtualization-and-isolation.md) |
-| 2 | Kali Linux | Planned | |
+| 2 | Kali Linux baseline | Complete | [setup/02-kali-linux.md](setup/02-kali-linux.md) |
 | 3 | Windows target | Planned | |
 | 4 | Wazuh server and agent | Planned | |
 | 5 | Sysmon | Planned | |
