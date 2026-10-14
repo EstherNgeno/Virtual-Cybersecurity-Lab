@@ -40,7 +40,7 @@
 | Host | Role | OS | IP address | RAM / vCPU | Status |
 |---|---|---|---|---|---|
 | WAZUH-SRV | SIEM: manager, indexer, dashboard | Ubuntu Server LTS | 10.10.10.10/24 | 4 GB / 2 | Planned (Phase 4) |
-| WIN-TGT | Monitored Windows endpoint | Windows 11 Enterprise evaluation | 10.10.10.20/24 | 4 GB / 2 | Planned (Phase 3) |
+| WIN-TGT | Monitored Windows endpoint | Windows 11 Enterprise evaluation, legacy BIOS firmware ([Finding 3.1](../setup/03-windows-target.md#finding-31-uefi-firmware-hangs-with-more-than-one-virtual-cpu-on-this-host)) | 10.10.10.20/24 | 4 GB / 2 | Baseline verified, Sysmon running (Phase 3) |
 | LNX-TGT | Vulnerable Linux target | Metasploitable 2 | 10.10.10.30/24 | 512 MB / 1 | Clean baseline snapshot (Phase 2) |
 | KALI | Assessment and packet capture | Kali Linux 2026.1 | 10.10.10.50/24 | 2 GB / 2 | Baseline verified (Phase 2) |
 
@@ -59,7 +59,7 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 |---|---|---|---|
 | KALI | Internal `soc-lab` | NAT, cable **disconnected** except during updates | Allow VMs (capture point) |
 | LNX-TGT | Internal `soc-lab` | None; never internet-connected | Deny |
-| WIN-TGT | Internal `soc-lab` | NAT, cable disconnected after setup | Deny |
+| WIN-TGT | Internal `soc-lab` | NAT, cable disconnected and adapter disabled inside Windows after setup | Deny |
 | WAZUH-SRV | Internal `soc-lab` | NAT, connected for feed updates and dashboard port-forward | Deny |
 
 ## Permitted traffic flows
@@ -70,6 +70,7 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 | Agent event forwarding | WIN-TGT, LNX-TGT → WAZUH-SRV | TCP 1514 |
 | Dashboard access | Host browser → WAZUH-SRV | 127.0.0.1:8443 → TCP 443 |
 | Assessment and simulation traffic | KALI → WIN-TGT, LNX-TGT | Varies by exercise |
+| Ping to WIN-TGT | 10.10.10.0/24 → WIN-TGT | ICMPv4 echo request (type 8), firewall rule `SOC-LAB Allow ICMPv4 Echo from lab` |
 
 ## Isolation controls
 
