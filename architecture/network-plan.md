@@ -17,7 +17,7 @@
                                     │
 ┌─────────────────────┐   ┌─────────┴───────────┐
 │ KALI                │   │ WAZUH-SRV           │
-│ Kali Linux 2026.1   │   │ Ubuntu Server LTS   │
+│ Kali Linux 2026.1   │   │ Ubuntu 24.04 LTS    │
 │ Nmap, Wireshark     │   │ Wazuh all-in-one    │
 │ 10.10.10.50         │   │ 10.10.10.10         │
 └──────────┬──────────┘   └─────────▲───────────┘
@@ -39,7 +39,7 @@
 
 | Host | Role | OS | IP address | RAM / vCPU | Status |
 |---|---|---|---|---|---|
-| WAZUH-SRV | SIEM: manager, indexer, dashboard | Ubuntu Server LTS | 10.10.10.10/24 | 4 GB / 2 | Planned (Phase 4) |
+| WAZUH-SRV | SIEM: manager, indexer, dashboard | Ubuntu Server 24.04.5 LTS, Wazuh 4.14.9 | 10.10.10.10/24 | 4 GB / 1 ([Finding 4.1](../setup/04-wazuh-server.md#finding-41-guest-instability-with-2-vcpus-on-the-windows-hypervisor)) | Server verified, no agents yet (Phase 4) |
 | WIN-TGT | Monitored Windows endpoint | Windows 11 Enterprise evaluation, legacy BIOS firmware ([Finding 3.1](../setup/03-windows-target.md#finding-31-uefi-firmware-hangs-with-more-than-one-virtual-cpu-on-this-host)) | 10.10.10.20/24 | 4 GB / 2 | Baseline verified, Sysmon running (Phase 3) |
 | LNX-TGT | Vulnerable Linux target | Metasploitable 2 | 10.10.10.30/24 | 512 MB / 1 | Clean baseline snapshot (Phase 2) |
 | KALI | Assessment and packet capture | Kali Linux 2026.1 | 10.10.10.50/24 | 2 GB / 2 | Baseline verified (Phase 2) |
@@ -60,7 +60,7 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 | KALI | Internal `soc-lab` | NAT, cable **disconnected** except during updates | Allow VMs (capture point) |
 | LNX-TGT | Internal `soc-lab` | None; never internet-connected | Deny |
 | WIN-TGT | Internal `soc-lab` | NAT, cable disconnected and adapter disabled inside Windows after setup | Deny |
-| WAZUH-SRV | Internal `soc-lab` | NAT, connected for feed updates and dashboard port-forward | Deny |
+| WAZUH-SRV | Internal `soc-lab` | NAT, connected for updates; port-forwards bound to 127.0.0.1 (8443 → 443, 2222 → 22) | Deny |
 
 ## Permitted traffic flows
 
@@ -69,6 +69,7 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 | Agent enrollment | WIN-TGT, LNX-TGT → WAZUH-SRV | TCP 1515 |
 | Agent event forwarding | WIN-TGT, LNX-TGT → WAZUH-SRV | TCP 1514 |
 | Dashboard access | Host browser → WAZUH-SRV | 127.0.0.1:8443 → TCP 443 |
+| Server administration | Host terminal → WAZUH-SRV | 127.0.0.1:2222 → TCP 22 (SSH) |
 | Assessment and simulation traffic | KALI → WIN-TGT, LNX-TGT | Varies by exercise |
 | Ping to WIN-TGT | 10.10.10.0/24 → WIN-TGT | ICMPv4 echo request (type 8), firewall rule `SOC-LAB Allow ICMPv4 Echo from lab` |
 
@@ -83,6 +84,6 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 | 5 | Pre-flight isolation check on KALI before each exercise ([scripts/preflight.sh](../scripts/preflight.sh)) | Human error, such as a NAT cable left connected |
 | 6 | Explicit lab IPs only in tool commands | Mistyped targets or hostnames |
 | 7 | Clipboard host-to-guest only; drag-and-drop and shared folders disabled | Files or data crossing to the host |
-| 8 | Dashboard port-forward bound to 127.0.0.1 | Other devices on the home Wi-Fi reaching the SIEM |
+| 8 | Dashboard and SSH port-forwards bound to 127.0.0.1 | Other devices on the home Wi-Fi reaching the SIEM |
 | 9 | Snapshots before each simulation phase | Persistent changes from simulations |
 | 10 | Dummy data and lab-only credentials; no real malware | Exposure of real data or accounts |

@@ -64,3 +64,50 @@ Optional, nice for non-technical readers: `phase1-kali-network-settings.png`, th
 | `phase3-win-tgt-sysmon-event1-notepad.png` | Event ID 1 for Notepad | Full process telemetry: image, command line, user, integrity level, hashes |
 | `phase3-win-tgt-post-reboot-baseline.png` | Hostname, Sysmon, IP, adapters, firewall, rule, route after reboot | The whole baseline persists across a restart |
 | `phase3-win-tgt-snapshots.png` | `VBoxManage snapshot WIN-TGT list` | `phase3-fresh-install` and `phase3-baseline` exist; baseline is current |
+
+## Phase 4: Wazuh server
+
+| File | Shows | What it proves |
+|---|---|---|
+| `phase4-iso-hash.png` | `Get-FileHash` on the Ubuntu Server ISO | Matches Ubuntu's official `SHA256SUMS` |
+| `phase4-wazuh-srv-vm-config.png` | `VBoxManage showvminfo` for WAZUH-SRV | BIOS, 4 GB, `soc-lab` + NAT, localhost-only forwards 8443 and 2222 |
+| `phase4-ubuntu-network-before.png` | Installer network screen | `autoconfiguration failed` on the lab adapter: no DHCP on `soc-lab` |
+| `phase4-ubuntu-network-static.png` | Installer network screen after editing | Static 10.10.10.10/24 on `enp0s3`; NAT DHCP 10.0.3.15 on `enp0s8` |
+| `phase4-ubuntu-storage.png` | Installer storage summary | Plain ext4 root plus BIOS boot partition |
+| `phase4-wazuh-srv-first-boot.png` | `hostnamectl`, `ip -br addr`, `ip route`, ping | Hostname, both addresses, single default route via NAT |
+| `phase4-dns-and-hostkey.png` | DNS lookup and first SSH prompt | Name resolution works; host-key fingerprint shown for comparison |
+| `phase4-ssh-first-attempt-closed.png` | Host: `ssh -p 2222` | Connection closed by grace-time expiry, not a wrong password |
+| `phase4-ssh-from-host.png` | Host: successful SSH login | Administration over 127.0.0.1:2222 |
+| `phase4-post-update.png` | `apt full-upgrade` end, `uname -r` | Fully patched, kernel 6.8.0-147, 0 upgradable |
+| `phase4-wazuh-srv-snapshot-base.png` | `snapshot take` and `list` | `phase4-ubuntu-base` taken offline with ISO ejected |
+| `phase4-boot-hang-initramfs.png` | VM console | Finding 4.1: boot stuck at `Loading essential drivers` |
+| `phase4-boot-hang-calltrace.png` | VM console | Kernel call trace in module loading during the hang |
+| `phase4-boot-retry-ssh-ok.png` | Retry boot and SSH | The same configuration booted normally on retry: intermittent |
+| `phase4-preflight.png` | `nproc`, `df -h`, installer size | Resources and installer download checked before install |
+| `phase4-preflight-script-header.png` | `head wazuh-install.sh` | Installer version 4.14.9 and Wazuh GPG key |
+| `phase4-wazuh-install-attempt1-indexer-failed.png` | Installer output, attempt 1 | `wazuh-indexer could not be started`; automatic rollback |
+| `phase4-indexer-diag.png` | `journalctl -u wazuh-indexer`, `free -h`, `dmesg` | Finding 4.2: 180 s start timeout; no out-of-memory |
+| `phase4-indexer-timeout-fix-and-attempt2.png` | Drop-in creation and attempt 2 start | `TimeoutStartSec=600` for the indexer |
+| `phase4-attempt2-ssh-dropped.png` | Host terminal | SSH dropped as the guest froze during attempt 2 |
+| `phase4-soft-lockup-console.png` | VM console | Finding 4.1: `soft lockup ... [G1 Refine]` on CPU#1 |
+| `phase4-attempt3-restore-and-dropin.png` | Login banner, drop-in, `ls` | Clean base restored before attempt 3 |
+| `phase4-wazuh-install-summary.png` | Installer output, attempt 3 (cropped above the password) | All components installed and started |
+| `phase4-boot-hang-2-initramfs.png` | VM console | Second boot hang at the same point |
+| `phase4-wazuh-lost-after-restore.png` | `is-active`, `filebeat`, `free -h` | Finding 4.3: install lost to a snapshot restore |
+| `phase4-snapshot-taken-during-shutdown.png` | `list runningvms`, `snapshot take` | Finding 4.3: snapshot taken while the VM was still shutting down |
+| `phase4-install-finished-log.png` | `wazuh-install.log`, `is-active`, `filebeat test output`, `free`, `df` | Attempt 4 finished without errors; services healthy |
+| `phase4-wazuh-health.png` | Health checks | 4 × active; Filebeat to indexer over TLS |
+| `phase4-disk-usage.png` | `du` on `/var` | 15 GB explained: vulnerability-detection database |
+| `phase4-apt-clean.png` | `apt clean`, `df -h` | 1.6 GB recovered; 45% used |
+| `phase4-rcu-stall-soft-lockups.png` | VM console, 2026-10-22 | Finding 4.1: RCU stall and soft lockups on both CPUs before a freeze |
+| `phase4-soak-resume-uptime.png` | `uptime` after resuming | Same boot as the soak (3 h 13 min) |
+| `phase4-soak-final.png` | `is-active`, `dmesg` grep, `free -h` | Services healthy; lockup reports present (Finding 4.4) |
+| `phase4-soak-lockups-host-standby.png` | `journalctl -k` lockup lines with real times | Finding 4.4: times that match host standby periods |
+| `phase4-dashboard-cert-fingerprint-server.png` | `openssl x509 -fingerprint -sha256` | Server-side certificate fingerprint, subject and expiry |
+| `phase4-dashboard-overview.png` | Dashboard Overview (profile area redacted) | Login works; no agents; 54 self-alerts; no errors |
+| `phase4-manager-self-alerts.png` | Threat Hunting events | Low alerts are `sudo`/PAM triplets from the analyst's commands |
+| `phase4-manager-self-alerts-medium.png` | Threat Hunting, `rule.level >= 7` | Medium alerts are dpkg package changes |
+| `phase4-unattended-upgrades-dpkg-timedatectl.png` | `timedatectl`, `dpkg.log` | Guest clock synchronised; which packages changed and when |
+| `phase4-unattended-upgrades-log.png` | `unattended-upgrades.log` | Who installed them, from which sources |
+| `phase4-awake-recheck.png` | Re-check after one hour | One lockup, matching a host standby; services healthy |
+| `phase4-wazuh-srv-snapshot-dashboard-verified.png` | `poweroff`, `snapshot take`, `snapshot list` | `phase4-dashboard-verified` taken offline and current |
