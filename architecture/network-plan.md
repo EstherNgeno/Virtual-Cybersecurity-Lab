@@ -39,8 +39,8 @@
 
 | Host | Role | OS | IP address | RAM / vCPU | Status |
 |---|---|---|---|---|---|
-| WAZUH-SRV | SIEM: manager, indexer, dashboard | Ubuntu Server 24.04.5 LTS, Wazuh 4.14.9 | 10.10.10.10/24 | 4 GB / 1 ([Finding 4.1](../setup/04-wazuh-server.md#finding-41-guest-instability-with-2-vcpus-on-the-windows-hypervisor)) | Server verified, no agents yet (Phase 4) |
-| WIN-TGT | Monitored Windows endpoint | Windows 11 Enterprise evaluation, legacy BIOS firmware ([Finding 3.1](../setup/03-windows-target.md#finding-31-uefi-firmware-hangs-with-more-than-one-virtual-cpu-on-this-host)) | 10.10.10.20/24 | 4 GB / 2 | Baseline verified, Sysmon running (Phase 3) |
+| WAZUH-SRV | SIEM: manager, indexer, dashboard | Ubuntu Server 24.04.5 LTS, Wazuh 4.14.9 | 10.10.10.10/24 | 4 GB / 1 ([Finding 4.1](../setup/04-wazuh-server.md#finding-41-guest-instability-with-2-vcpus-on-the-windows-hypervisor)) | Server verified; agent 001 WIN-TGT active (Phase 4) |
+| WIN-TGT | Monitored Windows endpoint | Windows 11 Enterprise evaluation, legacy BIOS firmware ([Finding 3.1](../setup/03-windows-target.md#finding-31-uefi-firmware-hangs-with-more-than-one-virtual-cpu-on-this-host)) | 10.10.10.20/24 | 2 GB / 2 (reduced from 4 GB, [Finding 4.6](../setup/04-wazuh-server.md#finding-46-host-memory-is-insufficient-for-two-4-gb-vms)) | Wazuh agent 4.14.9 enrolled; Sysmon forwarded to WAZUH-SRV (Phase 4) |
 | LNX-TGT | Vulnerable Linux target | Metasploitable 2 | 10.10.10.30/24 | 512 MB / 1 | Clean baseline snapshot (Phase 2) |
 | KALI | Assessment and packet capture | Kali Linux 2026.1 | 10.10.10.50/24 | 2 GB / 2 | Baseline verified (Phase 2) |
 
@@ -71,6 +71,7 @@ All addresses are static. The `soc-lab` network has no DHCP server, and no host 
 | Dashboard access | Host browser → WAZUH-SRV | 127.0.0.1:8443 → TCP 443 |
 | Server administration | Host terminal → WAZUH-SRV | 127.0.0.1:2222 → TCP 22 (SSH) |
 | Assessment and simulation traffic | KALI → WIN-TGT, LNX-TGT | Varies by exercise |
+| One-off file transfer (agent installer) | WIN-TGT → WAZUH-SRV | TCP 8000, `python3 -m http.server --bind 10.10.10.10`, run only for the transfer and then stopped |
 | Ping to WIN-TGT | 10.10.10.0/24 → WIN-TGT | ICMPv4 echo request (type 8), firewall rule `SOC-LAB Allow ICMPv4 Echo from lab` |
 
 ## Isolation controls

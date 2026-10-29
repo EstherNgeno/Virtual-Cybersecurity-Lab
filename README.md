@@ -2,7 +2,7 @@
 
 An isolated, self-hosted SOC lab for practising network reconnaissance, endpoint monitoring, threat detection and incident response. Controlled attack simulations are run against lab-owned systems, then investigated from the defender's side using SIEM alerts, endpoint telemetry and packet captures, and mapped to MITRE ATT&CK.
 
-> **Status:** Phases 1 to 3 complete (network isolation, Kali baseline, Windows target with Sysmon). Phase 4 in progress: Wazuh server built and verified; agent enrolment next.
+> **Status:** Phases 1 to 4 complete (network isolation, Kali baseline, Windows target with Sysmon, Wazuh SIEM with WIN-TGT enrolled and its first endpoint alerts triaged). Phase 5, Sysmon configuration and tuning, is next.
 
 ## Objectives
 
@@ -34,7 +34,7 @@ VirtualBox · Kali Linux · Wazuh · Sysmon · Wireshark · Nmap · Metasploitab
 | 1 | Virtualization and network isolation | Complete | [setup/01-virtualization-and-isolation.md](setup/01-virtualization-and-isolation.md) |
 | 2 | Kali Linux baseline | Complete | [setup/02-kali-linux.md](setup/02-kali-linux.md) |
 | 3 | Windows target (including Sysmon install) | Complete | [setup/03-windows-target.md](setup/03-windows-target.md) |
-| 4 | Wazuh server and agent | In progress (server complete) | [setup/04-wazuh-server.md](setup/04-wazuh-server.md) |
+| 4 | Wazuh server and agent | Complete | [setup/04-wazuh-server.md](setup/04-wazuh-server.md) |
 | 5 | Sysmon configuration and tuning | Planned | |
 | 6 | Network fundamentals and Wireshark | Planned | |
 | 7 | Nmap reconnaissance | Planned | |

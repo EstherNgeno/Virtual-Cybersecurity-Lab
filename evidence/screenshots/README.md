@@ -111,3 +111,30 @@ Optional, nice for non-technical readers: `phase1-kali-network-settings.png`, th
 | `phase4-unattended-upgrades-log.png` | `unattended-upgrades.log` | Who installed them, from which sources |
 | `phase4-awake-recheck.png` | Re-check after one hour | One lockup, matching a host standby; services healthy |
 | `phase4-wazuh-srv-snapshot-dashboard-verified.png` | `poweroff`, `snapshot take`, `snapshot list` | `phase4-dashboard-verified` taken offline and current |
+| `phase4-agent-server-ready.png` | `is-active`, `free -h` on WAZUH-SRV | Server healthy before enrolment |
+| `phase4-agent-win-tgt-2048mb.png` | `showvminfo WIN-TGT` | Finding 4.6: WIN-TGT reduced to 2048 MB |
+| `phase4-agent-win-tgt-to-server-ping.png` | `ping 10.10.10.10`, `Get-Service Sysmon64` | WIN-TGT reaches the server over `soc-lab`; Sysmon running |
+| `phase4-agent-msi-download.png` | `wazuh-control info`, `curl`, `ls -l` on WAZUH-SRV | Manager v4.14.9; matching agent MSI downloaded on the server |
+| `phase4-agent-msi-transfer-server-log.png` | `sha256sum`, `http.server` log | MSI hash; one download, by 10.10.10.20, then the server stopped |
+| `phase4-agent-msi-hash-signature.png` | `Get-FileHash`, `Get-AuthenticodeSignature` on WIN-TGT | Same hash as on the server; signed by Wazuh, Inc |
+| `phase4-agent-msiexec-1639.png` | First `msiexec` run | Exit code 1639 from a mistyped switch |
+| `phase4-agent-install-connected.png` | Exit code, `NET START`, `ossec.log` | Agent installed, connected, SCA scan finished |
+| `phase4-agent-control-list.png` | `agent_control -l` | Agent 001 WIN-TGT active on the manager |
+| `phase4-agent-dashboard-active.png` | Dashboard Endpoints (profile area redacted) | WIN-TGT active, Windows 11, v4.14.9 |
+| `phase4-agent-reconnect-after-boot.png` | Services, `ossec.log`, Sysmon events | Agent reconnects after a fresh boot |
+| `phase4-sysmon-ossec-conf-backup.png` | `Copy-Item`, `<location>` entries | Backup taken; default config lacks the Sysmon channel |
+| `phase4-sysmon-ossec-conf-typo-stopped.png` | Appended block, `Get-Service` | Finding 4.7: `<log_format/>` typo; agent stopped |
+| `phase4-sysmon-ossec-conf-rollback-fix.png` | `ossec.log` errors, rollback, re-append | Finding 4.7: XML error 1226; restored from backup; corrected block |
+| `phase4-sysmon-channel-collected.png` | Restart, `ossec.log` | `(1951) Analyzing event log: 'Microsoft-Windows-Sysmon/Operational'` |
+| `phase4-sysmon-alerts-dashboard.png` | Threat Hunting, WIN-TGT Sysmon channel (profile area redacted) | 31 alerts reached the SIEM; SCA burst and 92058 |
+| `phase4-sysmon-alerts-grep-observer-effect.png` | `grep -c`, last match | 31 in `alerts.json`; the search command matched itself |
+| `phase4-alert-92058-sdbinst.png` | Alert 92058 event data | Finding 4.9: `sdbinst.exe -m -bg` from `svchost.exe` as SYSTEM |
+| `phase4-alert-92205-pspolicytest.png` | Alert 92205 event data | Finding 4.8: PowerShell policy-test file in `SystemTemp` |
+| `phase4-alert-92066-secedit-sca.png` | Alert 92066 event data | Finding 4.8: `secedit /export` started from the agent folder |
+| `phase4-sysmon-after-restore.png` | Services, `ossec.log` after restoring `phase4-sysmon-collection` | Sysmon channel and connection survive restore and reboot |
+| `phase4-sdbinst-signature.png` | `Get-AuthenticodeSignature sdbinst.exe` | Finding 4.9: genuine Microsoft binary |
+| `phase4-shim-folder-installedsdb.png` | `Test-Path`, `InstalledSDB` query | Finding 4.9: no custom shim databases registered |
+| `phase4-shim-custom-registry.png` | `AppCompatFlags\Custom` query | Finding 4.9: no shim mappings |
+| `phase4-agent-reconnect-log.png` | Agent `ossec.log` 18:21 to 18:34 EAT | Finding 4.10: one-second disconnect and reconnect |
+| `phase4-manager-log-reconnect-window.png` | Manager `ossec.log` 15:33 to 15:35 UTC | Finding 4.10: no disconnect recorded on the server |
+| `phase4-complete-snapshots.png` | `list runningvms`, `snapshot take` on both VMs | `phase4-complete` taken with both VMs off |
