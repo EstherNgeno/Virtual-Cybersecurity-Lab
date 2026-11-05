@@ -248,8 +248,6 @@ The burst of 92205, 92066, 92031 and 92021 alerts ran from 13:52:04 to 13:52:12 
 
 ## 10. Snapshots
 
-## 10. Snapshots
-
 ```powershell
 VBoxManage snapshot WAZUH-SRV take phase4-dashboard-verified --description "1 vCPU, manager start-timeout drop-in, soak passed, dashboard cert verified, unattended-upgrades 2026-10-28 applied"
 ```

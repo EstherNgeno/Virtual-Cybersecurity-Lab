@@ -1,0 +1,89 @@
+# WIN-TGT bugcheck analysis: cdb (WinDbg 1.2610.1001.0) !analyze -v on both minidumps, 2026-11-05
+# Excerpt: arguments, process, stack, bucket. Full output kept off-repo with the dumps.
+
+===== 103026-5453-01.dmp
+IRQL_NOT_LESS_OR_EQUAL (a)
+An attempt was made to access a pageable (or completely invalid) address at an
+interrupt request level (IRQL) that is too high.  This is usually
+caused by drivers using improper addresses.
+Arguments:
+Arg1: ffff8081a556e3e4, memory referenced
+Arg2: 00000000000000ff, IRQL
+Arg3: 0000000000000000, bitfield :
+	bit 0 : value 0 = read operation, 1 = write operation
+	bit 3 : value 0 = not an execute operation, 1 = execute operation (only on chips which support this level of status)
+Arg4: fffff803d26b54e0, address which referenced memory
+BUGCHECK_CODE:  a
+BUGCHECK_P1: ffff8081a556e3e4
+BUGCHECK_P2: ff
+BUGCHECK_P3: 0
+BUGCHECK_P4: fffff803d26b54e0
+VIRTUAL_MACHINE:  VirtualBox
+FAULTING_THREAD:  ffffaa0b76fb1080
+READ_ADDRESS: fffff803d2fc54d8: Unable to get MiVisibleState
+ ffff8081a556e3e4 
+PROCESS_NAME:  conhost.exe
+IP_IN_PAGED_CODE: 
+nt!KiDpcInterrupt+0
+fffff803`d26b54e0 4883ec08        sub     rsp,8
+STACK_TEXT:  
+fffff583`eb24bf18 fffff803`d26c26e9     : 00000000`0000000a ffff8081`a556e3e4 00000000`000000ff 00000000`00000000 : nt!KeBugCheckEx
+fffff583`eb24bf20 fffff803`d26bd9a8     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiBugCheckDispatch+0x69
+fffff583`eb24c060 fffff803`d26b54e0     : fffff803`d22d4467 00000000`00000010 00000000`00010246 fffff583`eb24c220 : nt!KiPageFault+0x468
+fffff583`eb24c1f8 fffff803`d22d4467     : 00000000`746c7847 00000000`000000ff fffffd09`0002b3e0 00000000`ffffffff : nt!KiDpcInterrupt
+fffff583`eb24c220 fffff803`d22d1e92     : 00000000`00000040 ffff8081`000004cb fffff803`746c7847 00000000`00000000 : nt!ExAllocateHeapPool+0x2567
+fffff583`eb24c490 fffff803`d2b8017a     : 00000000`00000102 fffff583`eb24c5d9 ffffaa0b`742beea0 00000000`01ff0000 : nt!ExpAllocatePoolWithTagFromNode+0x52
+fffff583`eb24c4d0 fffff803`6752ed4c     : 00000000`00000000 fffff803`d2275bf9 00000000`00000000 fffff583`eb24c640 : nt!ExAllocatePool2+0x8a
+fffff583`eb24c530 fffff803`67aa4d00     : 0000002b`746c7847 fffffd08`b78b5360 fffffd08`b1350000 00000000`00000000 : win32kbase!AllocThreadBufferWithTag+0xac
+fffff583`eb24c640 fffff803`67aa4564     : 00000000`00000000 fffff803`67690572 fffffd08`b78b5360 fffffd08`d0ff0630 : win32kfull!CreateXlateObject+0x50
+fffff583`eb24c6f0 fffff803`67af076e     : fffff583`eb24c818 00000000`00000000 ffff8081`00000000 ffffaa0b`742a7778 : win32kfull!EXLATEOBJ::bInitXlateObj+0x104
+fffff583`eb24c7b0 fffff803`67af040b     : 7fffffff`fffffffc fffff583`eb24cab0 00000000`00000000 ffff8081`9fcf1080 : win32kfull!GreDrawStream+0x2ee
+fffff583`eb24ca80 fffff803`639b5706     : 00000000`00000058 00000000`07010708 fffffd08`b1381000 00000074`416ff890 : win32kfull!NtGdiDrawStream+0x8b
+fffff583`eb24cbf0 fffff803`d26c1d55     : ffffaa0b`76fb1080 00000000`00000060 ffffaa0b`76fb1080 00000000`00000000 : win32k!NtGdiDrawStream+0x4a
+fffff583`eb24cc20 00007ffb`1c561e44     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiSystemServiceCopyEnd+0x25
+00000074`416fefd8 00000000`00000000     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ffb`1c561e44
+SYMBOL_NAME:  win32kbase!AllocThreadBufferWithTag+ac
+MODULE_NAME: win32kbase
+IMAGE_NAME:  win32kbase.sys
+IMAGE_VERSION:  10.0.26100.9444
+FAILURE_BUCKET_ID:  AV_win32kbase!AllocThreadBufferWithTag
+
+===== 110426-16640-01.dmp
+IRQL_NOT_LESS_OR_EQUAL (a)
+An attempt was made to access a pageable (or completely invalid) address at an
+interrupt request level (IRQL) that is too high.  This is usually
+caused by drivers using improper addresses.
+Arguments:
+Arg1: 0000025fb41337a0, memory referenced
+Arg2: 00000000000000ff, IRQL
+Arg3: 0000000000000083, bitfield :
+	bit 0 : value 0 = read operation, 1 = write operation
+	bit 3 : value 0 = not an execute operation, 1 = execute operation (only on chips which support this level of status)
+Arg4: fffff8039d1d54e0, address which referenced memory
+BUGCHECK_CODE:  a
+BUGCHECK_P1: 25fb41337a0
+BUGCHECK_P2: ff
+BUGCHECK_P3: 83
+BUGCHECK_P4: fffff8039d1d54e0
+VIRTUAL_MACHINE:  VirtualBox
+FAULTING_THREAD:  ffffd7056abdc040
+WRITE_ADDRESS: fffff8039dae54d8: Unable to get MiVisibleState
+ 0000025fb41337a0 
+PROCESS_NAME:  svchost.exe
+IP_IN_PAGED_CODE: 
+nt!KiDpcInterrupt+0
+fffff803`9d1d54e0 4883ec08        sub     rsp,8
+STACK_TEXT:  
+fffffe8b`7c980588 fffff803`9d1e26e9     : 00000000`0000000a 0000025f`b41337a0 00000000`000000ff 00000000`00000083 : nt!KeBugCheckEx
+fffffe8b`7c980590 fffff803`9d1dd9a8     : fffff803`9daf25c0 fffff803`9cdec443 00000000`00000000 fffff803`2d830180 : nt!KiBugCheckDispatch+0x69
+fffffe8b`7c9806d0 fffff803`9d1d54e0     : fffff803`9cd34f84 00000000`00000010 00000000`00010246 fffffe8b`7c980890 : nt!KiPageFault+0x468
+fffffe8b`7c980868 fffff803`9cd34f84     : ffffd705`6a3c4440 0000025f`00000001 80000000`05b14801 ffffffff`ffffffff : nt!KiDpcInterrupt
+fffffe8b`7c980890 fffff803`9ce4b51f     : ffffd705`6a3bc910 ffffd705`6a3e1370 ffffd705`6a3e1370 00000000`00000004 : nt!IoRemoveIoCompletion+0x204
+fffffe8b`7c9809b0 fffff803`9d1e1d55     : 00000000`00000000 00000000`00000022 00000000`00000000 00000000`00000000 : nt!NtWaitForWorkViaWorkerFactory+0x6bf
+fffffe8b`7c980bb0 00007ffb`95504a74     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiSystemServiceCopyEnd+0x25
+000000ff`b22ffb58 00000000`00000000     : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ffb`95504a74
+SYMBOL_NAME:  nt!KiDpcInterrupt+0
+MODULE_NAME: nt
+IMAGE_NAME:  ntkrnlmp.exe
+IMAGE_VERSION:  10.0.26100.9457
+FAILURE_BUCKET_ID:  AV_nt!KiDpcInterrupt

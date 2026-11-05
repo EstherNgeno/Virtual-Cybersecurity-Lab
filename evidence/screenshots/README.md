@@ -138,3 +138,17 @@ Optional, nice for non-technical readers: `phase1-kali-network-settings.png`, th
 | `phase4-agent-reconnect-log.png` | Agent `ossec.log` 18:21 to 18:34 EAT | Finding 4.10: one-second disconnect and reconnect |
 | `phase4-manager-log-reconnect-window.png` | Manager `ossec.log` 15:33 to 15:35 UTC | Finding 4.10: no disconnect recorded on the server |
 | `phase4-complete-snapshots.png` | `list runningvms`, `snapshot take` on both VMs | `phase4-complete` taken with both VMs off |
+
+## Phase 5: Sysmon configuration and tuning
+
+| File | Shows | What it proves |
+|---|---|---|
+| `phase5-sysmon-id10-lsass-access.png` | Sysmon ID 10 events after the v2 config | LSASS access is now logged; normal traffic is `svchost.exe` with `0x1000` |
+| `phase5-sysmon-id17-psexesvc-pipe-test.png` | Sysmon ID 17 for `\PSEXESVC` created by PowerShell | The new pipe rule logs the PsExec pipe |
+| `phase5-lsa-runasppl-enabled.png` | `RunAsPPL` and `RunAsPPLBoot` = 2 | LSA protection is on |
+| `phase5-lsass-test-blocked-by-ppl.png` | Test access to LSASS refused | Finding 5.3: protection blocks the attempt and no ID 10 is logged |
+| `phase5-detection-tests-config-reload-pipe.png` | `Sysmon64 -c` v2 reload and pipe creation | Test events for rules 100100 and 100121 |
+| `phase5-bsod-recurrence-0xa.png` | System events 1001, 41, 6008 on 4 Nov | Finding 5.4: second crash with stop code 0xA |
+
+Text evidence: [`../logs/phase5-bsod-windbg-analyze.txt`](../logs/phase5-bsod-windbg-analyze.txt) (WinDbg analysis of both crash dumps).
+

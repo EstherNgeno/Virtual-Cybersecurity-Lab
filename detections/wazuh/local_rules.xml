@@ -1,0 +1,133 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+<group name="local,syslog,sshd,">
+
+  <!--
+  Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
+  -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+</group>
+
+<!-- Phase 5 (2026-11-04): detection gaps found in step 3 -->
+<group name="local,sysmon,phase5,">
+
+  <rule id="100100" level="10">
+    <if_sid>61644</if_sid>
+    <description>Sysmon configuration changed: $(win.eventdata.configuration)</description>
+    <mitre><id>T1562.006</id></mitre>
+    <group>sysmon_tamper,</group>
+  </rule>
+
+  <rule id="100110" level="12">
+    <if_sid>61612</if_sid>
+    <field name="win.eventdata.targetImage" type="pcre2">(?i)lsass\.exe$</field>
+    <field name="win.eventdata.grantedAccess" type="pcre2">(?i)^0x[0-9a-f]*[13579bdf][0-9a-f]$</field>
+    <description>LSASS memory read by $(win.eventdata.sourceImage) (access $(win.eventdata.grantedAccess)): possible credential dumping</description>
+    <mitre><id>T1003.001</id></mitre>
+  </rule>
+
+  <rule id="100120" level="10">
+    <if_sid>61645</if_sid>
+    <field name="win.eventdata.pipeName" type="pcre2">(?i)psexesvc</field>
+    <description>PsExec service pipe $(win.eventdata.pipeName) created by $(win.eventdata.image)</description>
+    <mitre><id>T1021.002</id><id>T1569.002</id></mitre>
+  </rule>
+
+  <rule id="100121" level="12">
+    <if_sid>100120</if_sid>
+    <field name="win.eventdata.image" type="pcre2" negate="yes">(?i)psexesvc\.exe$</field>
+    <description>PsExec pipe created by unexpected process $(win.eventdata.image): possible impersonation</description>
+    <mitre><id>T1021.002</id><id>T1036</id></mitre>
+  </rule>
+
+</group>
+
+<!-- Phase 5 step 4c: narrow noise exceptions for verified-benign WIN-TGT sources -->
+<group name="local,sysmon,noise_exception,">
+  <rule id="100200" level="0">
+    <if_sid>92021</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\SysWOW64\\\\WindowsPowerShell\\\\v1\.0\\\\powershell\.exe$</field>
+    <field name="win.eventdata.currentDirectory" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\ossec-agent\\\\$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)^powershell secedit /export /cfg \$env:TEMP\\\\secpol\.cfg; Get-Content \$env:TEMP\\\\secpol\.cfg \| Select-String \\"[A-Za-z]+\\"; Remove-Item \$env:TEMP\\\\secpol\.cfg$</field>
+    <description>Exception: Wazuh SCA secedit/PowerShell check (92021)</description>
+  </rule>
+  <rule id="100201" level="0">
+    <if_sid>92066</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\SysWOW64\\\\SecEdit\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)^\\"C:\\\\WINDOWS\\\\system32\\\\SecEdit\.exe\\" /export /cfg C:\\\\WINDOWS\\\\TEMP\\\\secpol\.cfg$</field>
+    <description>Exception: Wazuh SCA secedit export (92066)</description>
+  </rule>
+  <rule id="100202" level="0">
+    <if_sid>92031</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\SysWOW64\\\\net1?\.exe$</field>
+    <field name="win.eventdata.currentDirectory" type="pcre2">(?i)^C:\\\\Program Files \(x86\)\\\\ossec-agent\\\\$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)^(net user|C:\\\\WINDOWS\\\\system32\\\\net1 user)$</field>
+    <description>Exception: Wazuh SCA local user enumeration (92031)</description>
+  </rule>
+  <rule id="100203" level="0">
+    <if_sid>92205</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\(System32|SysWOW64)\\\\WindowsPowerShell\\\\v1\.0\\\\powershell\.exe$</field>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i)^C:\\\\Windows\\\\SystemTemp\\\\__PSScriptPolicyTest_[0-9a-z]{8}\.[0-9a-z]{3}\.psm?1$</field>
+    <description>Exception: PowerShell policy-test file, SYSTEM (92205)</description>
+  </rule>
+  <rule id="100204" level="0">
+    <if_sid>92213</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\System32\\\\(WindowsPowerShell\\\\v1\.0\\\\powershell|sdiagnhost)\.exe$</field>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i)^C:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_[0-9a-z]{8}\.[0-9a-z]{3}\.psm?1$</field>
+    <description>Exception: PowerShell policy-test file, user Temp (92213)</description>
+  </rule>
+  <rule id="100205" level="0">
+    <if_sid>92217</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Program Files\\\\Windows Defender\\\\MpCmdRun\.exe$</field>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i)^C:\\\\Windows\\\\SystemTemp\\\\[0-9a-f-]{36}MpCommU\\\\(UpdatePlatform|mpam-[0-9a-f]+)\.exe$</field>
+    <description>Exception: Defender update unpacking (92217)</description>
+  </rule>
+  <rule id="100206" level="0">
+    <if_sid>92058</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\System32\\\\sdbinst\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)^C:\\\\WINDOWS\\\\System32\\\\sdbinst\.exe -m -bg$</field>
+    <description>Exception: Windows compat database maintenance, no custom .sdb (92058)</description>
+  </rule>
+  <rule id="100207" level="0">
+    <if_sid>92307</if_sid>
+    <field name="win.eventdata.user" type="pcre2">^NT AUTHORITY\\\\SYSTEM$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\WINDOWS\\\\system32\\\\services\.exe$</field>
+    <field name="win.eventdata.targetObject" type="pcre2">(?i)^HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\[A-Za-z0-9]+_[0-9a-f]{4,6}\\\\ImagePath$</field>
+    <field name="win.eventdata.details" type="pcre2">(?i)^C:\\\\WINDOWS\\\\system32\\\\(svchost\.exe -k [A-Za-z0-9]+( -p)?|CredentialEnrollmentManager\.exe)$</field>
+    <description>Exception: Windows per-user service instances (92307)</description>
+  </rule>
+</group>
+
+<!-- Phase 5 step 6: make crashes and agent outages visible -->
+<group name="local,windows,availability,">
+  <rule id="100300" level="12">
+    <if_sid>61102</if_sid>
+    <field name="win.system.eventID">^1001$</field>
+    <description>Windows host rebooted after a bugcheck (BSOD): telemetry gap, investigate crash</description>
+  </rule>
+  <rule id="100301" level="10">
+    <if_sid>504</if_sid>
+    <description>Wazuh agent disconnected: endpoint telemetry gap</description>
+  </rule>
+  <rule id="100302" level="10">
+    <if_sid>506</if_sid>
+    <description>Wazuh agent stopped: maintenance or sensor tampering</description>
+    <mitre><id>T1562.001</id></mitre>
+  </rule>
+</group>
