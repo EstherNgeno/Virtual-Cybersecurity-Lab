@@ -152,3 +152,8 @@ Optional, nice for non-technical readers: `phase1-kali-network-settings.png`, th
 
 Text evidence: [`../logs/phase5-bsod-windbg-analyze.txt`](../logs/phase5-bsod-windbg-analyze.txt) (WinDbg analysis of both crash dumps).
 
+## Phase 6: Network fundamentals and Wireshark
+
+| File | Shows | What it proves |
+|---|---|---|
+| `phase6-ftp-cleartext-credentials.png` | Wireshark Follow TCP Stream, FTP stream 2 | Finding 6.1: username and password cross the network in cleartext; banner reveals vsFTPd 2.3.4 |

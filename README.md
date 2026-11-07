@@ -2,7 +2,7 @@
 
 An isolated, self-hosted SOC lab for practising network reconnaissance, endpoint monitoring, threat detection and incident response. Controlled attack simulations are run against lab-owned systems, then investigated from the defender's side using SIEM alerts, endpoint telemetry and packet captures, and mapped to MITRE ATT&CK.
 
-> **Status:** Phases 1 to 5 complete (network isolation, Kali baseline, Windows target with Sysmon, Wazuh SIEM with WIN-TGT enrolled, Sysmon and rule tuning with custom detections in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml)). Phase 6, network fundamentals and Wireshark, is next.
+> **Status:** Phases 1 to 5 complete (network isolation, Kali baseline, Windows target with Sysmon, Wazuh SIEM with WIN-TGT enrolled, Sysmon and rule tuning with custom detections in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml)). Phase 6, network fundamentals and Wireshark, is in progress (Stage A complete).
 
 ## Objectives
 
@@ -36,7 +36,7 @@ VirtualBox · Kali Linux · Wazuh · Sysmon · Wireshark · Nmap · Metasploitab
 | 3 | Windows target (including Sysmon install) | Complete | [setup/03-windows-target.md](setup/03-windows-target.md) |
 | 4 | Wazuh server and agent | Complete | [setup/04-wazuh-server.md](setup/04-wazuh-server.md) |
 | 5 | Sysmon configuration, tuning and log baselining | Complete | [setup/05-sysmon-tuning.md](setup/05-sysmon-tuning.md) |
-| 6 | Network fundamentals and Wireshark | Planned | |
+| 6 | Network fundamentals and Wireshark | In progress (Stage A complete) | [setup/06-network-wireshark.md](setup/06-network-wireshark.md) |
 | 7 | Nmap reconnaissance | Planned | |
 | 8 | Vulnerability assessment | Planned | |
 | 9 | Log analysis and baselining | Merged into Phase 5 | |
