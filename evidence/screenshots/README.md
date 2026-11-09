@@ -157,3 +157,6 @@ Text evidence: [`../logs/phase5-bsod-windbg-analyze.txt`](../logs/phase5-bsod-wi
 | File | Shows | What it proves |
 |---|---|---|
 | `phase6-ftp-cleartext-credentials.png` | Wireshark Follow TCP Stream, FTP stream 2 | Finding 6.1: username and password cross the network in cleartext; banner reveals vsFTPd 2.3.4 |
+| `phase6-sysmon-id3-powershell-4444.png` | Sysmon ID 3 on WIN-TGT, PowerShell to 10.10.10.50:4444 | B1.2: endpoint event with process, user and source port 49792, matching the capture |
+| `phase6-clock-test-id3-real-time.png` | `Get-Date` vs a new Sysmon ID 3 | Finding 6.5: system clock 3 min 11 s slow, network event in real time |
+| `phase6-clock-test-id1-slow-clock.png` | Sysmon ID 1 for `cmd.exe /c echo clocktest` | Finding 6.5: process event carries the slow clock |
