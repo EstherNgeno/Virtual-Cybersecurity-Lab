@@ -160,3 +160,11 @@ Text evidence: [`../logs/phase5-bsod-windbg-analyze.txt`](../logs/phase5-bsod-wi
 | `phase6-sysmon-id3-powershell-4444.png` | Sysmon ID 3 on WIN-TGT, PowerShell to 10.10.10.50:4444 | B1.2: endpoint event with process, user and source port 49792, matching the capture |
 | `phase6-clock-test-id3-real-time.png` | `Get-Date` vs a new Sysmon ID 3 | Finding 6.5: system clock 3 min 11 s slow, network event in real time |
 | `phase6-clock-test-id1-slow-clock.png` | Sysmon ID 1 for `cmd.exe /c echo clocktest` | Finding 6.5: process event carries the slow clock |
+
+## Phase 7: Nmap reconnaissance
+
+| File | Shows | What it proves |
+|---|---|---|
+| `phase7-lnx-tgt-xinetd-only-trace.png` | LNX-TGT `auth.log` and `syslog` for the scan time | Finding 7.1: the connect scan's only trace is one `xinetd` line with no client address |
+| `phase7-wintgt-no-scan-trace.png` | WIN-TGT: Sysmon by event ID, Security 5152/5156/5157 count, audit policy | Finding 7.5: a 1,007-port scan left no event; packet-drop auditing off |
+| `phase7-wintgt-5152-by-port.png` | WIN-TGT: event 5152 grouped by destination port | Finding 7.5 fix: 28 events from 10.10.10.50 covering all 11 scanned ports |

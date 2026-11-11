@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Wed Nov 11 10:36:18 2026 as: /usr/lib/nmap/nmap -sV -sC -p 21,22,139,445,3306,5900 -oA /home/kali/scans/p7-05-nse 10.10.10.30
+Host: 10.10.10.30 ()	Status: Up
+Host: 10.10.10.30 ()	Ports: 21/open/tcp//ftp//vsftpd 2.3.4/, 22/open/tcp//ssh//OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)/, 139/open/tcp//netbios-ssn//Samba smbd 3.X - 4.X (workgroup: WORKGROUP)/, 445/open/tcp//netbios-ssn//Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)/, 3306/open/tcp//mysql//MySQL 5.0.51a-3ubuntu5/, 5900/open/tcp//vnc//VNC (protocol 3.3)/
+# Nmap done at Wed Nov 11 10:36:30 2026 -- 1 IP address (1 host up) scanned in 11.84 seconds

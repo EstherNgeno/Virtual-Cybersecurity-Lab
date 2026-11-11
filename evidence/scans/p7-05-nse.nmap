@@ -1,0 +1,61 @@
+# Nmap 7.99 scan initiated Wed Nov 11 10:36:18 2026 as: /usr/lib/nmap/nmap -sV -sC -p 21,22,139,445,3306,5900 -oA /home/kali/scans/p7-05-nse 10.10.10.30
+Nmap scan report for 10.10.10.30
+Host is up (0.0015s latency).
+
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 2.3.4
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 10.10.10.50
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      vsFTPd 2.3.4 - secure, fast, stable
+|_End of status
+22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)
+|_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)
+3306/tcp open  mysql       MySQL 5.0.51a-3ubuntu5
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.0.51a-3ubuntu5
+|   Thread ID: 9
+|   Capabilities flags: 43564
+|   Some Capabilities: Support41Auth, ConnectWithDatabase, LongColumnFlag, SupportsTransactions, SwitchToSSLAfterHandshake, Speaks41ProtocolNew, SupportsCompression
+|   Status: Autocommit
+|_  Salt: VnGUX9T|3&dFp#WpOv*g
+5900/tcp open  vnc         VNC (protocol 3.3)
+| vnc-info: 
+|   Protocol version: 3.3
+|   Security types: 
+|_    VNC Authentication (2)
+MAC Address: 08:00:27:4B:14:1A (Oracle VirtualBox virtual NIC)
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| smb-os-discovery: 
+|   OS: Unix (Samba 3.0.20-Debian)
+|   Computer name: metasploitable
+|   NetBIOS computer name: 
+|   Domain name: localdomain
+|   FQDN: metasploitable.localdomain
+|_  System time: 2026-11-11T05:36:28-05:00
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smb2-time: Protocol negotiation failed (SMB2)
+|_nbstat: NetBIOS name: METASPLOITABLE, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+|_clock-skew: mean: 2h29m58s, deviation: 3h32m07s, median: -1s
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Nov 11 10:36:30 2026 -- 1 IP address (1 host up) scanned in 11.84 seconds

@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Wed Nov 11 09:23:14 2026 as: /usr/lib/nmap/nmap -sn -oA /home/kali/scans/p7-01-discovery 10.10.10.0/24
+Host: 10.10.10.30 ()	Status: Up
+Host: 10.10.10.50 ()	Status: Up
+# Nmap done at Wed Nov 11 09:23:21 2026 -- 256 IP addresses (2 hosts up) scanned in 6.14 seconds

@@ -1,0 +1,8 @@
+# Nmap 7.99 scan initiated Wed Nov 11 11:01:58 2026 as: /usr/lib/nmap/nmap -sS -oA /home/kali/scans/p7-07-wintgt-top1000 10.10.10.20
+Nmap scan report for 10.10.10.20
+Host is up (0.0018s latency).
+All 1000 scanned ports on 10.10.10.20 are in ignored states.
+Not shown: 1000 filtered tcp ports (no-response)
+MAC Address: 08:00:27:F9:D5:AD (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Wed Nov 11 11:02:19 2026 -- 1 IP address (1 host up) scanned in 21.38 seconds

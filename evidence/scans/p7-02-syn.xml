@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Wed Nov 11 09:56:13 2026 as: /usr/lib/nmap/nmap -sS -p 21,22,80,8888 -oA /home/kali/scans/p7-02-syn 10.10.10.30 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sS -p 21,22,80,8888 -oA /home/kali/scans/p7-02-syn 10.10.10.30" start="1794390973" startstr="Wed Nov 11 09:56:13 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="4" services="21-22,80,8888"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="10.10.10.30" addrtype="ipv4"/>
+<address addr="08:00:27:4B:14:1A" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1794390973" endtime="1794390973"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="10.10.10.30" addrtype="ipv4"/>
+<address addr="08:00:27:4B:14:1A" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" method="table" conf="3"/></port>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" method="table" conf="3"/></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" method="table" conf="3"/></port>
+<port protocol="tcp" portid="8888"><state state="closed" reason="reset" reason_ttl="64"/><service name="sun-answerbook" method="table" conf="3"/></port>
+</ports>
+<times srtt="1250" rttvar="1827" to="100000"/>
+</host>
+<runstats><finished time="1794390973" timestr="Wed Nov 11 09:56:13 2026" summary="Nmap done at Wed Nov 11 09:56:13 2026; 1 IP address (1 host up) scanned in 0.12 seconds" elapsed="0.12" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

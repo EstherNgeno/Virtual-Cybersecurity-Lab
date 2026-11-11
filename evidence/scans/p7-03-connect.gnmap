@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Wed Nov 11 09:56:33 2026 as: /usr/lib/nmap/nmap --privileged -sT -p 21,22,80,8888 -oA /home/kali/scans/p7-03-connect 10.10.10.30
+Host: 10.10.10.30 ()	Status: Up
+Host: 10.10.10.30 ()	Ports: 21/open/tcp//ftp///, 22/open/tcp//ssh///, 80/open/tcp//http///, 8888/closed/tcp//sun-answerbook///
+# Nmap done at Wed Nov 11 09:56:33 2026 -- 1 IP address (1 host up) scanned in 0.07 seconds

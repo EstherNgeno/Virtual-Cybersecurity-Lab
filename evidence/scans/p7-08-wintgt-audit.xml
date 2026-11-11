@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Wed Nov 11 11:08:30 2026 as: /usr/lib/nmap/nmap -&#45;privileged -sT -p 135,139,445,5040,49664-49669,8888 -oA /home/kali/scans/p7-08-wintgt-audit 10.10.10.20 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -&#45;privileged -sT -p 135,139,445,5040,49664-49669,8888 -oA /home/kali/scans/p7-08-wintgt-audit 10.10.10.20" start="1794395310" startstr="Wed Nov 11 11:08:30 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="connect" protocol="tcp" numservices="11" services="135,139,445,5040,8888,49664-49669"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="10.10.10.20" addrtype="ipv4"/>
+<address addr="08:00:27:F9:D5:AD" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1794395310" endtime="1794395311"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="10.10.10.20" addrtype="ipv4"/>
+<address addr="08:00:27:F9:D5:AD" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="135"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="msrpc" method="table" conf="3"/></port>
+<port protocol="tcp" portid="139"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="tcp" portid="445"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="microsoft-ds" method="table" conf="3"/></port>
+<port protocol="tcp" portid="5040"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="tcp" portid="8888"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="sun-answerbook" method="table" conf="3"/></port>
+<port protocol="tcp" portid="49664"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="tcp" portid="49665"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="tcp" portid="49666"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="tcp" portid="49667"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="tcp" portid="49668"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="tcp" portid="49669"><state state="filtered" reason="no-response" reason_ttl="0"/></port>
+</ports>
+<times srtt="1280" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1794395311" timestr="Wed Nov 11 11:08:31 2026" summary="Nmap done at Wed Nov 11 11:08:31 2026; 1 IP address (1 host up) scanned in 1.50 seconds" elapsed="1.50" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

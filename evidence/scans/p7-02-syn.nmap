@@ -1,0 +1,12 @@
+# Nmap 7.99 scan initiated Wed Nov 11 09:56:13 2026 as: /usr/lib/nmap/nmap -sS -p 21,22,80,8888 -oA /home/kali/scans/p7-02-syn 10.10.10.30
+Nmap scan report for 10.10.10.30
+Host is up (0.0013s latency).
+
+PORT     STATE  SERVICE
+21/tcp   open   ftp
+22/tcp   open   ssh
+80/tcp   open   http
+8888/tcp closed sun-answerbook
+MAC Address: 08:00:27:4B:14:1A (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Wed Nov 11 09:56:13 2026 -- 1 IP address (1 host up) scanned in 0.12 seconds
