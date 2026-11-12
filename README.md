@@ -2,7 +2,7 @@
 
 An isolated, self-hosted SOC lab for practising network reconnaissance, endpoint monitoring, threat detection and incident response. Controlled attack simulations are run against lab-owned systems, then investigated from the defender's side using SIEM alerts, endpoint telemetry and packet captures, and mapped to MITRE ATT&CK.
 
-> **Status:** Phases 1 to 6 complete (network isolation, Kali baseline, Windows target with Sysmon, Wazuh SIEM with WIN-TGT enrolled, Sysmon and rule tuning with custom detections in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml)). Phase 6 complete: packet analysis with Wireshark and tcpdump, endpoint-to-network correlation, and captures in [evidence/packet-captures/](evidence/packet-captures/). Phase 7 complete: Nmap reconnaissance of both targets, observed from the defender's side, with scans in [evidence/scans/](evidence/scans/). Phase 8, vulnerability assessment, is next.
+> **Status:** Phases 1 to 6 complete (network isolation, Kali baseline, Windows target with Sysmon, Wazuh SIEM with WIN-TGT enrolled, Sysmon and rule tuning with custom detections in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml)). Phase 6 complete: packet analysis with Wireshark and tcpdump, endpoint-to-network correlation, and captures in [evidence/packet-captures/](evidence/packet-captures/). Phase 7 complete: Nmap reconnaissance of both targets, observed from the defender's side, with scans in [evidence/scans/](evidence/scans/). Phase 8 complete: vulnerability assessment of both targets (confirmed backdoors on LNX-TGT; agent-based CVE and CIS results for WIN-TGT). Phase 10, attack simulations, is next.
 
 ## Objectives
 
@@ -38,7 +38,7 @@ VirtualBox · Kali Linux · Wazuh · Sysmon · Wireshark · Nmap · Metasploitab
 | 5 | Sysmon configuration, tuning and log baselining | Complete | [setup/05-sysmon-tuning.md](setup/05-sysmon-tuning.md) |
 | 6 | Network fundamentals and Wireshark | Complete | [setup/06-network-wireshark.md](setup/06-network-wireshark.md) |
 | 7 | Nmap reconnaissance | Complete | [setup/07-nmap-recon.md](setup/07-nmap-recon.md) |
-| 8 | Vulnerability assessment | Planned | |
+| 8 | Vulnerability assessment | Complete | [setup/08-vulnerability-assessment.md](setup/08-vulnerability-assessment.md) |
 | 9 | Log analysis and baselining | Merged into Phase 5 | |
 | 10 | Attack simulations (three scenarios), detection and investigation | Planned | |
 | 11 | Capstone investigation | Planned | |

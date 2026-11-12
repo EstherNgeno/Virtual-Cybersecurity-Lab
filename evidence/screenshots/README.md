@@ -168,3 +168,11 @@ Text evidence: [`../logs/phase5-bsod-windbg-analyze.txt`](../logs/phase5-bsod-wi
 | `phase7-lnx-tgt-xinetd-only-trace.png` | LNX-TGT `auth.log` and `syslog` for the scan time | Finding 7.1: the connect scan's only trace is one `xinetd` line with no client address |
 | `phase7-wintgt-no-scan-trace.png` | WIN-TGT: Sysmon by event ID, Security 5152/5156/5157 count, audit policy | Finding 7.5: a 1,007-port scan left no event; packet-drop auditing off |
 | `phase7-wintgt-5152-by-port.png` | WIN-TGT: event 5152 grouped by destination port | Finding 7.5 fix: 28 events from 10.10.10.50 covering all 11 scanned ports |
+
+## Phase 8: Vulnerability assessment
+
+| File | Shows | What it proves |
+|---|---|---|
+| `phase8-win-tgt-sca-cis-26pct.png` | Wazuh SCA, CIS Windows 11 v3.0.0 for WIN-TGT | Finding 8.8: 123 passed / 350 failed / 26% — un-hardened baseline |
+| `phase8-win-tgt-vuln-detection-summary.png` | Wazuh Vulnerability Detection summary for WIN-TGT | Finding 8.9: 41 critical / 715 high; 994 of 1,012 on the Windows package |
+| `phase8-win-tgt-critical-cves-inventory.png` | Critical CVE inventory, filtered | Finding 8.9: all 41 criticals against build 10.0.26300.9457 — one fix |
