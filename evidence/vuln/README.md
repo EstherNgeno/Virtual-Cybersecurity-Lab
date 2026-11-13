@@ -9,4 +9,3 @@ Nmap NSE output from KALI against LNX-TGT (10.10.10.30), on the isolated `soc-la
 
 Each confirmation script ran `id` as proof of access and stopped. Analysis: [setup/08-vulnerability-assessment.md](../../setup/08-vulnerability-assessment.md).
 
-> Scan files are transferred from KALI next session (KALI `~/vuln/`); this README is the placeholder.

