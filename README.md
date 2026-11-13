@@ -39,7 +39,7 @@ VirtualBox · Kali Linux · Wazuh · Sysmon · Wireshark · Nmap · Metasploitab
 | 6 | Network fundamentals and Wireshark | Complete | [setup/06-network-wireshark.md](setup/06-network-wireshark.md) |
 | 7 | Nmap reconnaissance | Complete | [setup/07-nmap-recon.md](setup/07-nmap-recon.md) |
 | 8 | Vulnerability assessment | Complete | [setup/08-vulnerability-assessment.md](setup/08-vulnerability-assessment.md) |
-| 9 | Log analysis and baselining | Merged into Phase 5 | |
+| 9 | Log analysis and baselining | Merged into Phase 5 | [setup/09-log-analysis-baselining.md](setup/09-log-analysis-baselining.md) |
 | 10 | Attack simulations (three scenarios), detection and investigation | Planned | |
 | 11 | Capstone investigation | Planned | |
 
