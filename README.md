@@ -2,7 +2,7 @@
 
 An isolated, self-hosted SOC lab for practising network reconnaissance, endpoint monitoring, threat detection and incident response. Controlled attack simulations are run against lab-owned systems, then investigated from the defender's side using SIEM alerts, endpoint telemetry and packet captures, and mapped to MITRE ATT&CK.
 
-> **Status:** Phases 1 to 6 complete (network isolation, Kali baseline, Windows target with Sysmon, Wazuh SIEM with WIN-TGT enrolled, Sysmon and rule tuning with custom detections in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml)). Phase 6 complete: packet analysis with Wireshark and tcpdump, endpoint-to-network correlation, and captures in [evidence/packet-captures/](evidence/packet-captures/). Phase 7 complete: Nmap reconnaissance of both targets, observed from the defender's side, with scans in [evidence/scans/](evidence/scans/). Phase 8 complete: vulnerability assessment of both targets (confirmed backdoors on LNX-TGT; agent-based CVE and CIS results for WIN-TGT). Phase 10 complete: four attack techniques simulated against WIN-TGT and detected from the SIEM — port scan (T1046), PowerShell C2 (T1571/T1059.001), sensor kill (T1562.001) and LLMNR poisoning (T1557.001) — with custom rules in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml) and the write-up in [setup/10-attack-simulations.md](setup/10-attack-simulations.md). Capstone investigation is next.
+> **Status:** Complete. An isolated four-VM lab was built across Phases 1–8 — network isolation, a Kali attacker, a Windows endpoint with Sysmon, and a Wazuh SIEM with WIN-TGT enrolled — including Wireshark/tcpdump packet analysis ([evidence/packet-captures/](evidence/packet-captures/)), Nmap reconnaissance ([evidence/scans/](evidence/scans/)) and a vulnerability assessment of both targets (confirmed backdoors on LNX-TGT; agent-based CVE and CIS results for WIN-TGT). Phase 10 closed the loop: four attacker techniques were simulated against WIN-TGT and detected from the SIEM — port scan (T1046), PowerShell C2 (T1571/T1059.001), sensor kill (T1562.001) and LLMNR poisoning (T1557.001) — each with a custom Wazuh rule in [detections/wazuh/local_rules.xml](detections/wazuh/local_rules.xml), verified from alert data and written up in [setup/10-attack-simulations.md](setup/10-attack-simulations.md).
 
 ## Objectives
 
@@ -41,7 +41,7 @@ VirtualBox · Kali Linux · Wazuh · Sysmon · Wireshark · Nmap · Metasploitab
 | 8 | Vulnerability assessment | Complete | [setup/08-vulnerability-assessment.md](setup/08-vulnerability-assessment.md) |
 | 9 | Log analysis and baselining | Merged into Phase 5 | [setup/09-log-analysis-baselining.md](setup/09-log-analysis-baselining.md) |
 | 10 | Attack simulations, detection and investigation | Complete | [setup/10-attack-simulations.md](setup/10-attack-simulations.md) |
-| 11 | Capstone investigation | Planned | |
+| 11 | Capstone investigation | Optional extension — not pursued | |
 
 ## Safety and scope
 
